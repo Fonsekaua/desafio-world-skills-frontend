@@ -1,6 +1,7 @@
 'use client'
 import CardCurso from "@/components/cardCurso";
 import cardCurso from "@/components/cardCurso";
+import InputInscricao from "@/components/InputInscricao";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -54,7 +55,8 @@ export default function Home() {
   ])
 
 
-
+  const [novoCurso,setNovoCurso] = useState();
+  const [criarCurso,setCriarCurso] = useState(false)
   const excluir = (nome) => {
     setCursos(prev => {
       return prev.filter(e => e.nome != nome);
@@ -63,12 +65,30 @@ export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
      
-
+    {
+      criarCurso && (
+              <div className="w-screen h-screen flex items-center justify-center bg-none fixed inset-0">
+          <form onSubmit={() => alert("curso criado com sucesso")} className="bg-gray-800 w-md *:flex *:flex-col *:mb-4 flex flex-col items-center">
+              <h2>Criar novo curso</h2>
+              <InputInscricao titulo="nome curso"  nome="nome" placeholder="nome do curso"/>
+              <InputInscricao titulo="descricao curso" nome="descricao" placeholder="descricao do curso"/>
+              <InputInscricao titulo="carga horaria curso" nome="cargaHoraria"  placeholder="descricao do curso"/>
+              <InputInscricao titulo="modalidade curso" nome="modalidade"  placeholder="modalidade do curso"/>
+              <InputInscricao titulo="vagas curso" nome="vagas"  placeholder="vagas do curso"/>
+              <InputInscricao titulo="data inicio curso" nome="data"  placeholder="data do curso"/>
+              <InputInscricao titulo="url curso" nome="url"  placeholder="url do curso"/>
+              <button>
+                 Criar curso
+              </button>
+          </form>
+      </div>
+      )
+    }
       <section className="w-screen container py-5 flex items-center justify-center">
           <div className="w-full flex flex-col gap-10">
             <div className="flex justify-between">
               <h1>Meus cursos</h1>
-              <button>
+              <button onClick={() => setCriarCurso(true)}>
                 Novo curso
               </button>
             </div>

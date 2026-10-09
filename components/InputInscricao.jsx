@@ -9,7 +9,7 @@ export default function InputInscricao(props) {
   return (
     <label htmlFor="">
         <small>{props.titulo}</small>
-        <input type={nome == "nome" ? "text": nome == "cpf" ? "number" : nome == "email"? "email": nome == "telefone"? "tel": nome == "data" ? "date": ""} placeholder={props.placeholder} name={props.nome} onChange={(e) => {
+        <input type={nome == "nome" ? "text": nome == "cpf" ? "number" : nome == "email"? "email": nome == "telefone"? "tel": nome == "data" ? "date": nome == "url"? "url" : nome == "cargaHoraria"?"number":"text"} placeholder={props.placeholder} name={props.nome} onChange={(e) => {
           props.onChange(e);
         }} value={props.valor}  required/>
     </label>
