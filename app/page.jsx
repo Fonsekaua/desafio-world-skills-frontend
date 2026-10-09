@@ -56,6 +56,19 @@ export default function Home() {
   const [filtroCusosNome,setFiltroCursosNome] = useState("");
 
 
+  useEffect(() => {
+    const filtroNome = () => {
+      setListaFiltrada(prev => {
+        if(!filtroCusosNome) {
+          return cursos;
+        } 
+        const filtro = prev.filter(e => e.nome.toLowerCase().includes(filtroCusosNome.toLowerCase()));
+        return filtro;
+      })
+    }
+
+    filtroNome();
+  },[filtroCusosNome])
 
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
