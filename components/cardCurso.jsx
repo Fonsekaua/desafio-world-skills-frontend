@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function CardCurso({props}) {
-    
+    const [verMais,setVerMais] = React.useState('');
 
   return (
 <>
@@ -13,7 +13,7 @@ export default function CardCurso({props}) {
             <p className='line-clamp-2'>{props.descricao}</p>
             <p>Carga horaria: {props.cargaHoraria}h</p>
         </div>
-        <button className='bg-emerald-500 p-2 w-56' >
+        <button className='bg-emerald-500 p-2 w-56' onClick={() => setVerMais(prev => !prev)}>
             Ver detalhes
         </button>
     </div>
