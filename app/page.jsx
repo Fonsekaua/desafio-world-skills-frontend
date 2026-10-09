@@ -1,6 +1,7 @@
 'use client'
 import CardCurso from "@/components/cardCurso";
 import cardCurso from "@/components/cardCurso";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -86,7 +87,8 @@ export default function Home() {
   },[filtroCursosModalidade])
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
-      <div className="bg-gray-950 p-3 flex items-center gap-5 w-xl justify-between rounded-lg">
+      <div className="flex gap-10">
+        <div className="bg-gray-950 p-3 flex items-center gap-5 w-xl justify-between rounded-lg">
         <input onChange={(e) => setFiltroCursosNome(e.target.value)} value={filtroCusosNome} placeholder="Pesquise o nome do curso" className="flex-1 outline-none" />
      
         <select className="bg-gray-950 w-32 text-center" onChange={(e) => setFiltroCursosModalidade(e.target.value)} value={filtroCursosModalidade}>
@@ -97,6 +99,9 @@ export default function Home() {
           <option value="mecanica automotiva">Filtro</option>
           <option value="linguas estrangeiras">Filtro</option>
         </select>
+      </div>
+
+      <Link href="/pefil/cursos">Meus cursos</Link>
       </div>
 
       <section className="w-screen container py-5 flex items-center justify-center">
