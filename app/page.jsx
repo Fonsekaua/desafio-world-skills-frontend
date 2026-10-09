@@ -70,6 +70,20 @@ export default function Home() {
     filtroNome();
   },[filtroCusosNome])
 
+
+    useEffect(() => {
+    const filtroModalidade = () => {
+      setListaFiltrada(prev => {
+        if(!filtroCursosModalidade) {
+          return cursos;
+        } 
+        const filtro = prev.filter(e => e.modalidade.toLowerCase() == filtroCursosModalidade.toLowerCase());
+        return filtro;
+      })
+    }
+
+    filtroModalidade();
+  },[filtroCursosModalidade])
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
       <div className="bg-gray-950 p-3 flex items-center gap-5 w-xl justify-between rounded-lg">
