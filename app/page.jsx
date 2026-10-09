@@ -101,7 +101,7 @@ export default function Home() {
         </select>
       </div>
 
-      <Link href="/pefil/cursos">Meus cursos</Link>
+      <Link href="/perfil/cursos">Meus cursos</Link>
       </div>
 
       <section className="w-screen container py-5 flex items-center justify-center">
