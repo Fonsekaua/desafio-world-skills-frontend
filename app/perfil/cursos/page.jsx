@@ -13,7 +13,7 @@ export default function Home() {
       descricao: "Descrição incrivel de um curso incrivel bla bla bla bla bla",
       modalidade: "tecnologia",
       quantVagas: 80,
-         dataInicio: "31/02/2026",
+      dataInicio: "31/02/2026",
       cargaHoraria: 56
     },
     {
@@ -22,7 +22,7 @@ export default function Home() {
       descricao: "Descrição incrivel de um curso incrivel bla bla bla bla bla",
       modalidade: "engenharia eletrica",
       quantVagas: 80,
-         dataInicio: "31/02/2026",
+      dataInicio: "31/02/2026",
       cargaHoraria: 56
     },
     {
@@ -31,7 +31,7 @@ export default function Home() {
       descricao: "Descrição incrivel de um curso incrivel bla bla bla bla bla",
       modalidade: "gastronomia",
       quantVagas: 80,
-          dataInicio: "31/02/2026",
+      dataInicio: "31/02/2026",
       cargaHoraria: 56
     },
     {
@@ -49,14 +49,27 @@ export default function Home() {
       descricao: "Descrição incrivel de um curso incrivel bla bla bla bla bla",
       modalidade: "linguas estrangeiras",
       quantVagas: 80,
-       dataInicio: "31/02/2026",
+      dataInicio: "31/02/2026",
       cargaHoraria: 56
-    },
+    }
   ])
 
 
-  const [novoCurso,setNovoCurso] = useState();
-  const [criarCurso,setCriarCurso] = useState(false)
+  const [novoCurso, setNovoCurso] = useState(
+        {
+      nome: "",
+      imagem: "",
+      descricao: "",
+      modalidade: "",
+      quantVagas: 0,
+       dataInicio: "",
+      cargaHoraria: 0
+    }
+  );
+  const handleChange = (e) => {
+      const {value,name} = e.target
+  }
+  const [criarCurso, setCriarCurso] = useState(false)
   const excluir = (nome) => {
     setCursos(prev => {
       return prev.filter(e => e.nome != nome);
@@ -64,55 +77,73 @@ export default function Home() {
   }
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
-     
-    {
-      criarCurso && (
-              <div className="w-screen h-screen flex items-center justify-center bg-none fixed inset-0">
-          <form onSubmit={() => alert("curso criado com sucesso")} className="bg-gray-800 w-md *:flex *:flex-col *:mb-4 flex flex-col items-center">
+
+      {
+        criarCurso && (
+          <div className="w-screen h-screen flex items-center justify-center bg-none fixed inset-0">
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              const valido = e.target.checkValidity();
+
+              if (valido) {
+                setCursos(prev => {
+                  [...prev],
+                  {
+                    nome: "curso05",
+                    imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbquKAjQiLvkNpNnXyik7SWvNhaAXBoslzmJSm-FZIHrvSaYLoRly8T6o&s=10",
+                    descricao: "Descrição incrivel de um curso incrivel bla bla bla bla bla",
+                    modalidade: "linguas estrangeiras",
+                    quantVagas: 80,
+                    dataInicio: "31/02/2026",
+                    cargaHoraria: 56
+                  }
+                })
+              }
+            }} className="bg-gray-800 w-md *:flex *:flex-col *:mb-4 flex flex-col items-center">
               <h2>Criar novo curso</h2>
-              <InputInscricao titulo="nome curso"  nome="nome" placeholder="nome do curso"/>
-              <InputInscricao titulo="descricao curso" nome="descricao" placeholder="descricao do curso"/>
-              <InputInscricao titulo="carga horaria curso" nome="cargaHoraria"  placeholder="descricao do curso"/>
-              <InputInscricao titulo="modalidade curso" nome="modalidade"  placeholder="modalidade do curso"/>
-              <InputInscricao titulo="vagas curso" nome="vagas"  placeholder="vagas do curso"/>
-              <InputInscricao titulo="data inicio curso" nome="data"  placeholder="data do curso"/>
-              <InputInscricao titulo="url curso" nome="url"  placeholder="url do curso"/>
+              <InputInscricao titulo="nome curso" nome="nome" placeholder="nome do curso" />
+              <InputInscricao titulo="descricao curso" nome="descricao" placeholder="descricao do curso" />
+              <InputInscricao titulo="carga horaria curso" nome="cargaHoraria" placeholder="descricao do curso" />
+              <InputInscricao titulo="modalidade curso" nome="modalidade" placeholder="modalidade do curso" />
+              <InputInscricao titulo="vagas curso" nome="vagas" placeholder="vagas do curso" />
+              <InputInscricao titulo="data inicio curso" nome="data" placeholder="data do curso" />
+              <InputInscricao titulo="url curso" nome="url" placeholder="url do curso" />
               <button>
-                 Criar curso
+                Criar curso
               </button>
-          </form>
-      </div>
-      )
-    }
-      <section className="w-screen container py-5 flex items-center justify-center">
-          <div className="w-full flex flex-col gap-10">
-            <div className="flex justify-between">
-              <h1>Meus cursos</h1>
-              <button onClick={() => setCriarCurso(true)}>
-                Novo curso
-              </button>
-            </div>
-            <div className={`flex flex-col ${cursos.length>0?"justify-between":"justify-center"}`}>
-              {
-              cursos.length>0 ? 
-               cursos.map((curso,index) => (
-                <div key={index} className="bg-gray-950 py-4 my-2 px-2">  
-                  {curso.nome}
-                  <div className="flex gap-2">
-                    <button>
-                     Editar
-                  </button>
-                  <button onClick={()=> excluir(curso.nome)}>
-                     excluir
-                  </button>
-                  </div>
-                </div>
-              ))
-              : 
-              <p className=" text-center my-20 text-2xl font-bold ">nenhum curso encontrado</p>
-            }
-            </div>
+            </form>
           </div>
+        )
+      }
+      <section className="w-screen container py-5 flex items-center justify-center">
+        <div className="w-full flex flex-col gap-10">
+          <div className="flex justify-between">
+            <h1>Meus cursos</h1>
+            <button onClick={() => setCriarCurso(true)}>
+              Novo curso
+            </button>
+          </div>
+          <div className={`flex flex-col ${cursos.length > 0 ? "justify-between" : "justify-center"}`}>
+            {
+              cursos.length > 0 ?
+                cursos.map((curso, index) => (
+                  <div key={index} className="bg-gray-950 py-4 my-2 px-2">
+                    {curso.nome}
+                    <div className="flex gap-2">
+                      <button>
+                        Editar
+                      </button>
+                      <button onClick={() => excluir(curso.nome)}>
+                        excluir
+                      </button>
+                    </div>
+                  </div>
+                ))
+                :
+                <p className=" text-center my-20 text-2xl font-bold ">nenhum curso encontrado</p>
+            }
+          </div>
+        </div>
       </section>
     </div>
   );
