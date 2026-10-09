@@ -52,51 +52,41 @@ export default function Home() {
       cargaHoraria: 56
     },
   ])
-  const [listaFiltrada,setListaFiltrada] = useState(cursos);
-  const [filtroCursosModalidade,setFiltroCursosModalidade] = useState('');
-  const [filtroCusosNome,setFiltroCursosNome] = useState("");
 
 
-  useEffect(() => {
-    const filtroNome = () => {
-      setListaFiltrada(prev => {
-        if(!filtroCusosNome) {
-          return cursos;
-        } 
-        const filtro = prev.filter(e => e.nome.toLowerCase().includes(filtroCusosNome.toLowerCase()));
-        return filtro;
-      })
-    }
 
-    filtroNome();
-  },[filtroCusosNome])
-
-
-    useEffect(() => {
-    const filtroModalidade = () => {
-      setListaFiltrada(prev => {
-        if(!filtroCursosModalidade) {
-          return cursos;
-        } 
-        const filtro = prev.filter(e => e.modalidade.toLowerCase() == filtroCursosModalidade.toLowerCase());
-        return filtro;
-      })
-    }
-
-    filtroModalidade();
-  },[filtroCursosModalidade])
+  const excluir = (nome) => {
+    setCursos(prev => {
+      return prev.filter(e => e.nome != nome);
+    })
+  }
   return (
     <div className="flex flex-col flex-1 items-center py-10 font-sans bg-gray-900">
      
 
       <section className="w-screen container py-5 flex items-center justify-center">
           <div className="w-full flex flex-col gap-10">
-            <h1>Meus cursos</h1>
-            <div className={`flex ${listaFiltrada.length>0?"justify-between":"justify-center"}`}>
+            <div className="flex justify-between">
+              <h1>Meus cursos</h1>
+              <button>
+                Novo curso
+              </button>
+            </div>
+            <div className={`flex flex-col ${cursos.length>0?"justify-between":"justify-center"}`}>
               {
-              listaFiltrada.length>0 ? 
-               listaFiltrada.map((curso,index) => (
-                <CardCurso  key={index} props={curso}/>
+              cursos.length>0 ? 
+               cursos.map((curso,index) => (
+                <div key={index} className="bg-gray-950 py-4 my-2 px-2">  
+                  {curso.nome}
+                  <div className="flex gap-2">
+                    <button>
+                     Editar
+                  </button>
+                  <button onClick={()=> excluir(curso.nome)}>
+                     excluir
+                  </button>
+                  </div>
+                </div>
               ))
               : 
               <p className=" text-center my-20 text-2xl font-bold ">nenhum curso encontrado</p>
